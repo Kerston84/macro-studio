@@ -39,7 +39,7 @@ def icon():
 
 def notices(folder):
     folder.mkdir(parents=True, exist_ok=True)
-    lines = ['Windows Macro Studio — bibliothèques distribuées', '',
+    lines = ['Macro Studio — bibliothèques distribuées', '',
              'Qt/PySide6 sont chargés comme bibliothèques partagées. Leurs licences et les autres notices sont conservées ci-dessous.',
              'Sources Qt : https://download.qt.io/archive/qt/',
              'Sources PySide6/Shiboken : https://download.qt.io/official_releases/QtForPython/', '']
@@ -69,9 +69,9 @@ def version_file(path):
     version = tuple(map(int, VERSION.split('.'))) + (0,)
     info = VSVersionInfo(ffi=FixedFileInfo(filevers=version, prodvers=version, mask=0x3f, flags=0, OS=0x40004, fileType=1, subtype=0, date=(0, 0)),
         kids=[StringFileInfo([StringTable('040c04b0', [StringStruct(k, v) for k, v in {
-            'CompanyName': 'Windows Macro Studio', 'FileDescription': 'Windows Macro Studio',
-            'FileVersion': VERSION, 'InternalName': 'WindowsMacroStudio',
-            'OriginalFilename': 'WindowsMacroStudio.exe', 'ProductName': 'Windows Macro Studio',
+            'CompanyName': 'Macro Studio', 'FileDescription': 'Macro Studio',
+            'FileVersion': VERSION, 'InternalName': 'MacroStudio',
+            'OriginalFilename': 'MacroStudio.exe', 'ProductName': 'Macro Studio',
             'ProductVersion': VERSION}.items()])]), VarFileInfo([VarStruct('Translation', [1036, 1200])])])
     path.write_text(str(info), encoding='utf-8')
 
@@ -83,7 +83,7 @@ def run(command, **kwargs):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--iscc', type=Path, help='Chemin vers ISCC.exe (Inno Setup 6.6+ ou 7)')
-    parser.add_argument('--output', type=Path, default=ROOT.parent / f'WindowsMacroStudio-release-{VERSION}')
+    parser.add_argument('--output', type=Path, default=ROOT.parent / f'MacroStudio-release-{VERSION}')
     parser.add_argument('--skip-tests', action='store_true', help='Réutiliser une suite déjà vérifiée ; diagnostic du .exe toujours effectué')
     parser.add_argument('--reuse-bundle', action='store_true', help='Reconditionner le dossier déjà compilé, sans recompilation (sources inchangées uniquement)')
     parser.add_argument('--runtime-check-blocked', action='store_true', help='Produire les fichiers sans les lancer après un blocage de sécurité Windows ; diagnostic explicitement non validé')
@@ -105,7 +105,7 @@ def main():
     licenses = stage / 'Licences'
     notices(licenses)
     command = [sys.executable, '-m', 'PyInstaller', '--noconfirm', '--clean', '--onedir', '--windowed',
-        '--name', 'WindowsMacroStudio', '--icon', app_icon, '--version-file', versions,
+        '--name', 'MacroStudio', '--icon', app_icon, '--version-file', versions,
         '--distpath', stage / 'dist', '--workpath', stage / 'pyinstaller', '--specpath', stage,
         '--paths', ROOT, '--add-data', f'{ROOT / "macro_studio/icons"};macro_studio/icons',
         '--hidden-import', 'pynput.keyboard._win32', '--hidden-import', 'pynput.mouse._win32',
@@ -115,14 +115,14 @@ def main():
                    'PySide6.QtQml', 'PySide6.QtQuick', 'PySide6.QtMultimedia', 'PySide6.QtPdf', 'PySide6.QtPdfWidgets'):
         command += ['--exclude-module', module]
     command.append(ROOT / 'run_app.py')
-    bundle = stage / 'dist/WindowsMacroStudio'
+    bundle = stage / 'dist/MacroStudio'
     if not args.reuse_bundle:
         build_environment = dict(os.environ)
         # Avoid collecting unrelated DLLs from tools such as Poppler on PATH.
         build_environment['PATH'] = os.pathsep.join([str(Path(sys.executable).parent), sys.base_prefix,
             str(Path(os.environ['SystemRoot']) / 'System32'), os.environ['SystemRoot']])
         run(command, env=build_environment)
-    if not (bundle / 'WindowsMacroStudio.exe').is_file():
+    if not (bundle / 'MacroStudio.exe').is_file():
         raise RuntimeError('Dossier compilé introuvable ; lancez une compilation complète.')
     # Qt uses the ICU facade provided by Windows 10/11. A foreign ICU with
     # version-suffixed exports shadows it and prevents QtCore from loading.
@@ -157,17 +157,17 @@ def main():
             'Cette livraison est compilée, sans validation de lancement ni de cycle d’installation.\n'
             'Aucune protection Windows n’a été désactivée. Une signature reconnue ou une analyse de la stratégie par l’administrateur peut être nécessaire.\n', encoding='utf-8')
     else:
-        run([bundle / 'WindowsMacroStudio.exe', '--self-test', diagnostic], env=environment, timeout=90)
+        run([bundle / 'MacroStudio.exe', '--self-test', diagnostic], env=environment, timeout=90)
         report = json.loads(diagnostic.read_text(encoding='utf-8'))
         if not report['ok'] or report.get('version') != VERSION:
             raise RuntimeError('Le diagnostic autonome a échoué.')
     run([compiler, f'/DAppVersion={VERSION}', f'/DBundleDir={bundle}', f'/DOutputDir={output}',
          f'/DAppIcon={app_icon}', ROOT / 'packaging/installer.iss'])
-    archive = output / f'WindowsMacroStudio-Portable-{VERSION}-x64.zip'
+    archive = output / f'MacroStudio-Portable-{VERSION}-x64.zip'
     with ZipFile(archive, 'w', ZIP_DEFLATED) as zipped:
         for path in bundle.rglob('*'):
             if path.is_file():
-                zipped.write(path, Path('WindowsMacroStudio') / path.relative_to(bundle))
+                zipped.write(path, Path('MacroStudio') / path.relative_to(bundle))
     shutil.copy2(ROOT / 'packaging/LISEZ-MOI.txt', output / 'LISEZ-MOI.txt')
     shutil.copy2(ROOT / 'DISCORD.md', output / 'DISCORD.md')
     checksums = []
