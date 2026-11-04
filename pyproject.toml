@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "windows-macro-studio"
+version = "0.23.0"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+description = "Editeur de macros Windows avec workflows, reconnaissance et défilement"
+requires-python = ">=3.11"
+dependencies = ["PySide6>=6.7,<7", "pynput>=1.7.7,<2", "opencv-python-headless>=4.10,<6", "mss>=10.2,<11", "numpy>=2,<3", "discord.py>=2.6,<3"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+build = ["pyinstaller==6.22.3", "Pillow==12.3.0"]
+
+[project.gui-scripts]
+windows-macro-studio = "macro_studio.app:main"
+
+[tool.setuptools.packages.find]
+include = ["macro_studio*"]
+
+[tool.setuptools.package-data]
+macro_studio = ["icons/*.svg", "icons/*.ico"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
