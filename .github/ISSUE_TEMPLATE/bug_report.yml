@@ -1,0 +1,27 @@
+name: Signaler un problème
+description: Décrire un problème reproductible sans données personnelles.
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version de Windows et de Macro Studio
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+      description: Utilisez un exemple synthétique, sans compte ni jeton.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Résultat attendu et résultat obtenu
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Extrait du journal nettoyé
+      description: Supprimez les secrets, noms de compte et données privées.
