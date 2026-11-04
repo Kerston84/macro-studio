@@ -3,8 +3,8 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "windows-macro-studio"
-version = "0.23.0"
+name = "macro-studio"
+version = "0.23.1"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -17,7 +17,7 @@ test = ["pytest>=8,<10"]
 build = ["pyinstaller==6.22.3", "Pillow==12.3.0"]
 
 [project.gui-scripts]
-windows-macro-studio = "macro_studio.app:main"
+macro-studio = "macro_studio.app:main"
 
 [tool.setuptools.packages.find]
 include = ["macro_studio*"]

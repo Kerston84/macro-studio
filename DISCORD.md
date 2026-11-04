@@ -1,4 +1,4 @@
-# Notifications et commandes Discord — 0.23.0
+# Notifications et commandes Discord — 0.23.1
 
 ## Mention sur le téléphone
 

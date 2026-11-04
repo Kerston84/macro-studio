@@ -29,7 +29,7 @@ def run():
         log = folder / 'startup-error.log'
         log.write_text(traceback.format_exc(), encoding='utf-8')
         import ctypes
-        ctypes.windll.user32.MessageBoxW(None, 'Impossible de démarrer Macro Studio.\nDétail : ' + str(log), 'Windows Macro Studio', 0x10)
+        ctypes.windll.user32.MessageBoxW(None, 'Impossible de démarrer Macro Studio.\nDétail : ' + str(log), 'Macro Studio', 0x10)
         return 1
 
 

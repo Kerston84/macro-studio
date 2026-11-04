@@ -1,6 +1,6 @@
-# Construire et distribuer Windows Macro Studio
+# Construire et distribuer Macro Studio
 
-La distribution Windows 64 bits comprend un installateur `.exe`, une archive portable contenant `WindowsMacroStudio.exe`, les empreintes SHA-256 et un rapport de diagnostic. Python et les bibliothèques sont inclus : aucun environnement Python n’est nécessaire chez l’utilisateur.
+La distribution Windows 64 bits comprend un installateur `.exe`, une archive portable contenant `MacroStudio.exe`, les empreintes SHA-256 et un rapport de diagnostic. Python et les bibliothèques sont inclus : aucun environnement Python n’est nécessaire chez l’utilisateur.
 
 ## Prérequis de compilation
 
@@ -22,27 +22,27 @@ La compilation nettoie aussi `PATH` pour ne pas embarquer les DLL d’autres out
 
 Si une stratégie de contrôle d’application Windows refuse explicitement l’exécution (erreur 4551), `--runtime-check-blocked` permet uniquement de préparer les fichiers sans les lancer. Cette option ne modifie aucune protection et écrit un diagnostic bloqué ainsi qu’un fichier `LANCEMENT-NON-VALIDE.txt`. Une telle livraison ne doit pas être présentée comme validée en exécution ou en installation.
 
-La sortie par défaut est un dossier `WindowsMacroStudio-release-<version>` à côté du projet. Pour choisir une autre destination : `--output "C:\chemin\livraison"`.
+La sortie par défaut est un dossier `MacroStudio-release-<version>` à côté du projet. Pour choisir une autre destination : `--output "C:\chemin\livraison"`.
 
 ## Choix de distribution
 
-L’application utilise un dossier PyInstaller plutôt qu’un exécutable qui extrait toutes ses dépendances à chaque lancement. L’installateur est un fichier unique téléchargeable ; il place l’exécutable et ses bibliothèques dans `%LOCALAPPDATA%\Programs\Windows Macro Studio`. Aucune élévation administrateur n’est demandée. Le menu Démarrer reçoit un raccourci et le Bureau est optionnel. La version portable doit être entièrement extraite et conserver son dossier `_internal`.
+L’application utilise un dossier PyInstaller plutôt qu’un exécutable qui extrait toutes ses dépendances à chaque lancement. L’installateur est un fichier unique téléchargeable ; il place l’exécutable et ses bibliothèques dans `%LOCALAPPDATA%\Programs\Macro Studio`. Aucune élévation administrateur n’est demandée. Le menu Démarrer reçoit un raccourci et le Bureau est optionnel. La version portable doit être entièrement extraite et conserver son dossier `_internal`.
 
-Les nouveaux workflows sont proposés dans le dossier Documents Windows, sous `Windows Macro Studio\Workflows`. Les documents existants ne sont ni déplacés ni inclus dans les binaires. L’historique et les réglages existants restent accessibles via le même profil Windows. Le mode portable utilise également ce profil : il ne transporte pas les secrets Discord avec le dossier du programme.
+Un ancien dossier de workflows existant est réutilisé lors des mises à jour. Les nouveaux workflows sont proposés dans le dossier Documents Windows, sous `Macro Studio\Workflows`. Les documents existants ne sont ni déplacés ni inclus dans les binaires. L’historique et les réglages existants restent accessibles via le même profil Windows. Le mode portable utilise également ce profil : il ne transporte pas les secrets Discord avec le dossier du programme.
 
 L’identifiant de l’installateur est stable afin de permettre les mises à jour. La désinstallation ne supprime ni les workflows, ni les réglages du profil, ni les compteurs. Le programme signale au système quand il est ouvert pour éviter de le remplacer pendant son exécution. Fermez et sauvegardez l’application avant de mettre à jour.
 
 ## Diagnostic sans interaction sur le Bureau
 
 ```powershell
-& ".\WindowsMacroStudio\WindowsMacroStudio.exe" --self-test "$env:TEMP\macro-studio-diagnostic.json"
+& ".\MacroStudio\MacroStudio.exe" --self-test "$env:TEMP\macro-studio-diagnostic.json"
 ```
 
 Ce diagnostic construit l’interface hors écran, utilise des réglages et fichiers temporaires, teste les icônes, la sauvegarde de deux modules, le menu d’accueil, les dépendances natives, DPAPI et l’OCR Windows sur une image synthétique. Il ne capture pas l’écran personnel, n’envoie pas de touches/clics et ne contacte pas Discord. Il quitte avec le code 0 si tout est validé, 1 sinon.
 
 En cas d’erreur de démarrage normale, le détail est enregistré dans `%LOCALAPPDATA%\WindowsMacroStudio\Logs\startup-error.log`.
 
-Le script `tools\smoke_installer.py` peut vérifier l’installateur dans un nouveau dossier de test, puis le désinstaller. Il refuse de s’exécuter si une installation normale existe déjà pour ce compte, afin de ne pas la remplacer. Exemple : `python tools\smoke_installer.py "C:\livraison\WindowsMacroStudio-Setup-0.18.0-x64.exe" "C:\travail\nouveau-dossier-validation"`. Ce test installe temporairement l’application sur le compte Windows, avec sa clé de désinstallation, sans raccourcis et sans modifier les préférences existantes.
+Le script `tools\smoke_installer.py` peut vérifier l’installateur dans un nouveau dossier de test, puis le désinstaller. Il refuse de s’exécuter si une installation normale existe déjà pour ce compte, afin de ne pas la remplacer. Exemple : `python tools\smoke_installer.py "C:\livraison\MacroStudio-Setup-0.18.0-x64.exe" "C:\travail\nouveau-dossier-validation"`. Ce test installe temporairement l’application sur le compte Windows, avec sa clé de désinstallation, sans raccourcis et sans modifier les préférences existantes.
 
 ## Avant une diffusion publique
 

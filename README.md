@@ -1,8 +1,8 @@
-# Windows Macro Studio
+# Macro Studio
 
 Éditeur visuel de macros pour Windows : créez des séquences de clics, de touches et de texte, puis reliez-les dans un workflow.
 
-**Version 0.23.0 — préversion communautaire · Windows 10/11 x64 · Python 3.12 recommandé · Licence MIT**
+**Version 0.23.1 — préversion communautaire · Windows 10/11 x64 · Python 3.12 recommandé · Licence MIT**
 
 ![Éditeur de workflow](docs/workflow.png)
 
@@ -51,13 +51,13 @@ $env:QT_QPA_PLATFORM = "offscreen"
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-La référence locale est **374 tests réussis**, avec réseau Discord et entrées souris/clavier simulés. Le test OCR Windows utilise une image synthétique. L’exécution des tests sur GitHub Actions sera vérifiée après la première publication.
+La référence locale est **375 tests réussis**, avec réseau Discord et entrées souris/clavier simulés. Le test OCR Windows utilise une image synthétique. La validation GitHub Actions de la version initiale a également réussi.
 
 La construction de l’installateur et du ZIP portable est décrite dans [BUILD_WINDOWS.md](BUILD_WINDOWS.md). Les composants tiers et leurs licences doivent accompagner les distributions binaires.
 
 ## État de la préversion
 
-Les sources et les tests locaux sont disponibles. Les binaires 0.23.0 ne sont pas signés. Leur lancement et leur installation n’ont pas été revalidés sur la machine de préparation, après un blocage de contrôle d’application Windows (erreur 4551) avec une version précédente. La validation sur une machine Windows propre et sur un serveur Discord réel reste à effectuer. Aucun réglage de sécurité Windows n’a été modifié.
+Les sources et les tests locaux sont disponibles. Les binaires 0.23.1 ne sont pas signés. Leur lancement et leur installation n’ont pas été revalidés sur la machine de préparation, après un blocage de contrôle d’application Windows (erreur 4551) avec une version précédente. La validation sur une machine Windows propre et sur un serveur Discord réel reste à effectuer. Aucun réglage de sécurité Windows n’a été modifié.
 
 Les tests réussis ne constituent pas une validation de ces binaires. Les publications binaires doivent rester marquées **Pre-release** tant que ces vérifications ne sont pas terminées.
 
@@ -67,4 +67,4 @@ Lisez [CONTRIBUTING.md](CONTRIBUTING.md) pour proposer un correctif ou signaler 
 
 ## Licence
 
-Le code propre à Windows Macro Studio est sous [licence MIT](LICENSE). Les dépendances conservent leurs licences respectives, notamment PySide6/Qt et les composants distribués dans `Licences` lors de la compilation. Voir [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Le code propre à Macro Studio est sous [licence MIT](LICENSE). Les dépendances conservent leurs licences respectives, notamment PySide6/Qt et les composants distribués dans `Licences` lors de la compilation. Voir [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
