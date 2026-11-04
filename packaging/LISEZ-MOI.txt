@@ -1,0 +1,36 @@
+WINDOWS MACRO STUDIO — WINDOWS 10 / 11, 64 BITS
+
+INSTALLATION
+Lancez WindowsMacroStudio-Setup-0.23.0-x64.exe et suivez l'assistant.
+L'installation ne nécessite ni Python ni droits administrateur.
+Un raccourci est disponible dans le menu Démarrer ; le raccourci Bureau est optionnel.
+
+VERSION PORTABLE
+Décompressez entièrement WindowsMacroStudio-Portable-0.23.0-x64.zip dans un dossier.
+Lancez WindowsMacroStudio.exe. Gardez le dossier _internal et les autres fichiers à côté.
+Ne lancez pas l'exécutable directement depuis l'archive ZIP.
+Les préférences et compteurs restent enregistrés dans votre profil Windows, même en mode portable.
+
+VOS DOCUMENTS
+Les nouveaux workflows sont proposés dans Documents\Windows Macro Studio\Workflows.
+Vos fichiers existants peuvent être ouverts avec Ouvrir ou retrouvés dans l'accueil.
+La mise à jour et la désinstallation conservent vos workflows et vos réglages locaux.
+Les préférences et compteurs utilisent la clé HKCU\Software\WindowsMacroStudio\Documents.
+Les adresses Discord sont protégées pour votre compte Windows ; elles ne sont pas transférables sur un autre compte.
+
+UTILISATION
+F8 arrête l'exécution. Vérifiez les cibles et commencez par une séquence simple.
+L'OCR utilise les langues OCR de Windows. Les notifications Discord nécessitent Internet et votre webhook.
+
+DÉSINSTALLATION
+Paramètres Windows → Applications → Windows Macro Studio → Désinstaller.
+Fermez l'application avant une mise à jour ou une désinstallation.
+
+SIGNATURE
+Cette version de développement n'est pas signée avec un certificat de signature de code.
+Windows peut afficher un avertissement de réputation. Ne désactivez pas vos protections.
+Les empreintes SHA-256 des fichiers sont fournies dans SHA256SUMS.txt.
+
+DIAGNOSTIC
+En cas d'échec au démarrage : %LOCALAPPDATA%\WindowsMacroStudio\Logs\startup-error.log
+Les licences des bibliothèques sont dans le dossier Licences de l'application.
