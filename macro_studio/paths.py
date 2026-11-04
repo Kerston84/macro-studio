@@ -8,7 +8,9 @@ def default_workflow_folder():
     if not getattr(sys, 'frozen', False):
         return Path(__file__).resolve().parent.parent
     documents = QStandardPaths.writableLocation(QStandardPaths.DocumentsLocation)
-    return Path(documents or str(Path.home() / 'Documents')) / 'Windows Macro Studio' / 'Workflows'
+    documents = Path(documents or str(Path.home() / 'Documents'))
+    legacy = documents / 'Windows Macro Studio' / 'Workflows'
+    return legacy if legacy.is_dir() else documents / 'Macro Studio' / 'Workflows'
 
 
 def prepare_workflow_folder():

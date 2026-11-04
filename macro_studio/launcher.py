@@ -110,7 +110,7 @@ class LaunchDialog(QDialog):
         self.library = library
         self.choice = None
         self.selected_path = None
-        self.setWindowTitle("Windows Macro Studio — Accueil")
+        self.setWindowTitle("Macro Studio — Accueil")
         self.resize(780, 590)
         layout = QVBoxLayout(self)
         title = QLabel("Ouvrir un workflow ou une séquence")

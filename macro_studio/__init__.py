@@ -1,1 +1,1 @@
-"""Windows Macro Studio, phase 1."""
+"""Macro Studio, phase 1."""

@@ -97,7 +97,7 @@ class MainWindow(QMainWindow):
         self.run_widget.pause_requested.connect(self.pause_run)
         self.run_widget.resume_requested.connect(self.resume_run)
         self.run_widget.stop_requested.connect(self.stop)
-        self.setWindowTitle("Windows Macro Studio • Workflows")
+        self.setWindowTitle("Macro Studio • Workflows")
         self.resize(1400, 880)
         root = QWidget()
         root.setObjectName("workspace")
@@ -106,7 +106,7 @@ class MainWindow(QMainWindow):
         layout.setContentsMargins(18, 14, 18, 8)
         layout.setSpacing(10)
         header = QHBoxLayout()
-        title = QLabel("Windows Macro Studio")
+        title = QLabel("Macro Studio")
         title.setProperty('role', 'heading')
         header.addWidget(title)
         header.addStretch()
@@ -409,7 +409,7 @@ class MainWindow(QMainWindow):
 
     def update_document_status(self):
         name = Path(self.path).name if self.path else "Nouveau document"
-        self.setWindowTitle(f"Windows Macro Studio • {name}{' *' if self.dirty else ''}")
+        self.setWindowTitle(f"Macro Studio • {name}{' *' if self.dirty else ''}")
         state = "Modifications non enregistrées" if self.dirty else "Enregistré" if self.path else "Première sauvegarde : choisissez un nom"
         popups = f" · Mode popups actif ({sum(r.enabled for r in self.workflow.popups.rules)} règle(s))" if self.workflow.popups.enabled else ""
         self.file_label.setText(f"{name} · {state}{popups}")

@@ -61,7 +61,7 @@ def send_webhook(url, content, mention=""):
     url = validate_url(url)
     payload = json.dumps(message_payload(content, mention), ensure_ascii=False).encode('utf-8')
     req = request.Request(url + '?wait=true', data=payload, headers={
-        'Content-Type': 'application/json', 'User-Agent': 'WindowsMacroStudio/' + VERSION}, method='POST')
+        'Content-Type': 'application/json', 'User-Agent': 'MacroStudio/' + VERSION}, method='POST')
     try:
         with request.build_opener(NoRedirect()).open(req, timeout=8) as response:
             if not 200 <= response.status < 300:
@@ -308,7 +308,7 @@ class DiscordPanel(QWidget):
             return
         self.status.setText('Envoi du message de test…')
         self.test_button.setEnabled(False)
-        self.notifier.dispatch(url, '✅ Windows Macro Studio : les notifications Discord fonctionnent.', test=True, mention_override=mention)
+        self.notifier.dispatch(url, '✅ Macro Studio : les notifications Discord fonctionnent.', test=True, mention_override=mention)
 
     def test_bot(self):
         if not self.save():
@@ -318,7 +318,7 @@ class DiscordPanel(QWidget):
             return
         self.notifier.remote.connect_bot()
         self.bot_test_button.setEnabled(False)
-        self.notifier.dispatch(self.notifier.url, '✅ Windows Macro Studio : connexion du bot testée. Les boutons apparaîtront au lancement du workflow.')
+        self.notifier.dispatch(self.notifier.url, '✅ Macro Studio : connexion du bot testée. Les boutons apparaîtront au lancement du workflow.')
 
     def result(self, ok, message):
         self.status.setText(message)
